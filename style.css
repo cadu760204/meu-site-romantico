@@ -1283,3 +1283,21 @@ url("capa.jpg") center center / cover no-repeat;
         ),
         url("capa.jpg") center center / cover no-repeat;
 }
+/* FUNDO DEFINITIVO DA TELA FINAL */
+
+.final-scene {
+    background-image:
+        linear-gradient(
+            rgba(30, 10, 20, 0.62),
+            rgba(15, 4, 10, 0.78)
+        ),
+        url("./capa.jpg") !important;
+
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+.final-scene::before {
+    background-image: none !important;
+}
