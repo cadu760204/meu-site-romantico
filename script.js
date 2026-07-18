@@ -87,165 +87,38 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
-/* INSTRUMENTAL ROMÂNTICO GERADO PELO NAVEGADOR */
+/* MÚSICA DO SITE */
 
-let audioContext = null;
-let masterGain = null;
-let instrumentalInterval = null;
-let instrumentalStarted = false;
-let musicPaused = false;
-let chordPosition = 0;
+const backgroundMusic =
+    document.getElementById("backgroundMusic");
 
-/*
-    Progressão suave em Dó maior:
-    C - Am - F - G
-*/
+async function startInstrumental() {
+    try {
+        backgroundMusic.volume = 0.35;
+        await backgroundMusic.play();
 
-const romanticChords = [
-    [261.63, 329.63, 392.0],
-    [220.0, 261.63, 329.63],
-    [174.61, 220.0, 261.63],
-    [196.0, 246.94, 293.66]
-];
-
-const melodyNotes = [
-    523.25,
-    493.88,
-    440.0,
-    392.0,
-    440.0,
-    392.0,
-    349.23,
-    392.0
-];
-
-function createSoftNote(frequency, startTime, duration, volume, type = "sine") {
-    if (!audioContext || !masterGain) {
-        return;
+        musicButton.textContent = "♫";
+        musicButton.classList.remove("paused");
+    } catch (error) {
+        console.log("A música aguardará outra interação.");
     }
-
-    const oscillator = audioContext.createOscillator();
-    const noteGain = audioContext.createGain();
-
-    oscillator.type = type;
-    oscillator.frequency.setValueAtTime(frequency, startTime);
-
-    noteGain.gain.setValueAtTime(0.0001, startTime);
-    noteGain.gain.exponentialRampToValueAtTime(
-        volume,
-        startTime + 0.35
-    );
-
-    noteGain.gain.exponentialRampToValueAtTime(
-        0.0001,
-        startTime + duration
-    );
-
-    oscillator.connect(noteGain);
-    noteGain.connect(masterGain);
-
-    oscillator.start(startTime);
-    oscillator.stop(startTime + duration + 0.1);
-}
-
-function playRomanticSequence() {
-    if (
-        !audioContext ||
-        audioContext.state !== "running" ||
-        musicPaused
-    ) {
-        return;
-    }
-
-    const now = audioContext.currentTime;
-    const chord = romanticChords[chordPosition % romanticChords.length];
-
-    chord.forEach((frequency, index) => {
-        createSoftNote(
-            frequency,
-            now,
-            4.2,
-            index === 0 ? 0.045 : 0.025,
-            index === 0 ? "triangle" : "sine"
-        );
-
-        createSoftNote(
-            frequency / 2,
-            now,
-            4.4,
-            0.012,
-            "sine"
-        );
-    });
-
-    const melodyIndex = chordPosition * 2;
-
-    createSoftNote(
-        melodyNotes[melodyIndex % melodyNotes.length],
-        now + 0.5,
-        1.7,
-        0.026,
-        "sine"
-    );
-
-    createSoftNote(
-        melodyNotes[(melodyIndex + 1) % melodyNotes.length],
-        now + 2.25,
-        1.5,
-        0.022,
-        "sine"
-    );
-
-    chordPosition += 1;
-}
-
-function startInstrumental() {
-    if (instrumentalStarted) {
-        return;
-    }
-
-    const AudioContextClass =
-        window.AudioContext || window.webkitAudioContext;
-
-    if (!AudioContextClass) {
-        musicButton.style.display = "none";
-        return;
-    }
-
-    audioContext = new AudioContextClass();
-    masterGain = audioContext.createGain();
-
-    masterGain.gain.value = 0.75;
-    masterGain.connect(audioContext.destination);
-
-    instrumentalStarted = true;
-    musicPaused = false;
-
-    playRomanticSequence();
-
-    instrumentalInterval = window.setInterval(
-        playRomanticSequence,
-        4300
-    );
 }
 
 musicButton.addEventListener("click", async () => {
-    if (!instrumentalStarted) {
-        startInstrumental();
-        return;
-    }
+    try {
+        if (backgroundMusic.paused) {
+            await backgroundMusic.play();
 
-    if (musicPaused) {
-        await audioContext.resume();
-        musicPaused = false;
-        musicButton.classList.remove("paused");
-        musicButton.textContent = "♫";
-        playRomanticSequence();
-    } else {
-        await audioContext.suspend();
-        musicPaused = true;
-        musicButton.classList.add("paused");
-        musicButton.textContent = "♪";
+            musicButton.textContent = "♫";
+            musicButton.classList.remove("paused");
+        } else {
+            backgroundMusic.pause();
+
+            musicButton.textContent = "♪";
+            musicButton.classList.add("paused");
+        }
+    } catch (error) {
+        console.log("Não foi possível controlar a música.");
     }
 });
 
