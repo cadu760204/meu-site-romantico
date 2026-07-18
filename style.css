@@ -972,3 +972,68 @@ footer span {
         height: 44px;
     }
 }
+/* NOVA CAPA DO SITE */
+
+.hero {
+    min-height: 100vh;
+    padding: 40px 20px;
+    background:
+        linear-gradient(
+            rgba(20, 20, 15, 0.25),
+            rgba(20, 20, 15, 0.42)
+        ),
+        url("capa.jpg") center center / cover no-repeat;
+}
+
+.hero::after {
+    display: none;
+}
+
+.hero-content.wedding-card {
+    width: min(720px, 92%);
+    padding: 55px 35px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: rgba(74, 72, 53, 0.68);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(3px);
+}
+
+.save-date-title {
+    margin-bottom: 12px;
+    color: #ffffff;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(3rem, 8vw, 6.3rem);
+    font-style: italic;
+    line-height: 0.9;
+}
+
+.hero h2 {
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.wedding-line {
+    width: 100px;
+    height: 1px;
+    margin: 22px auto;
+    background: rgba(255, 255, 255, 0.75);
+}
+
+.wedding-subtitle {
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 0.23em;
+    font-size: 0.7rem;
+}
+
+.hero .special-date {
+    margin-top: 0;
+    margin-bottom: 22px;
+    color: #ffffff;
+}
+
+.hero .hero-phrase {
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+}
