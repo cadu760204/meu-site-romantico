@@ -1269,3 +1269,13 @@ footer span {
         height: 310px;
     }
 }
+/* NOVO FUNDO DA SURPRESA FINAL */
+
+.final-scene {
+    background:
+        linear-gradient(
+            rgba(43, 15, 28, 0.82),
+            rgba(17, 5, 12, 0.94)
+        ),
+        url("capa.jpg") center center / cover no-repeat;
+}
