@@ -1309,5 +1309,4 @@ url("capa.jpg") center center / cover no-repeat;
             rgba(40, 16, 27, 0.62),
             rgba(65, 24, 42, 0.72)
         ),
-        url("entrada.jpg") center 30% / cover no-repeat !important;
-}
+       url("entrada.jpg") center center / cover no-repeat !important;
