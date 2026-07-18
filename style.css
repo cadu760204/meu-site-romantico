@@ -772,7 +772,11 @@ footer span {
     color: var(--white);
     text-align: center;
     background:
-        radial-gradient(circle at center, #280916 0%, #090207 68%);
+       linear-gradient(
+    rgba(35, 12, 24, 0.72),
+    rgba(15, 4, 10, 0.88)
+),
+url("capa.jpg") center center / cover no-repeat;
 }
 
 .final-scene::before {
