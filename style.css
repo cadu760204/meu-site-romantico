@@ -1301,3 +1301,13 @@ url("capa.jpg") center center / cover no-repeat;
 .final-scene::before {
     background-image: none !important;
 }
+/* FOTO DA TELA DE ENTRADA */
+
+.intro {
+    background:
+        linear-gradient(
+            rgba(40, 16, 27, 0.62),
+            rgba(65, 24, 42, 0.72)
+        ),
+        url("entrada.jpg") center center / cover no-repeat !important;
+}
