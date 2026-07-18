@@ -1246,3 +1246,26 @@ footer span {
         height: 430px;
     }
 }
+/* DIMINUIR AS FOTOS DA GALERIA */
+
+.memory-grid {
+    width: min(850px, 100%);
+    gap: 22px;
+}
+
+.memory-card img {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media (max-width: 760px) {
+    .memory-grid {
+        width: min(330px, 100%);
+    }
+
+    .memory-card img {
+        height: 310px;
+    }
+}
