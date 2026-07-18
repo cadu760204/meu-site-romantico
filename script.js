@@ -127,57 +127,69 @@ musicButton.addEventListener("click", async () => {
 function createHeartStars() {
     heartStars.innerHTML = "";
 
-    const numberOfStars = 95;
+    /*
+        Garante que a animação apareça mesmo que exista
+        uma regra antiga escondendo o coração.
+    */
 
-    for (let index = 0; index < numberOfStars; index += 1) {
-        const angle =
-            (Math.PI * 2 * index) / numberOfStars;
+    heartStars.style.setProperty(
+        "display",
+        "block",
+        "important"
+    );
 
-        /*
-            Fórmula matemática de um coração.
-        */
+    const numberOfLights = 36;
 
-        const heartX =
-            16 * Math.pow(Math.sin(angle), 3);
+    for (let index = 0; index < numberOfLights; index += 1) {
+        const light = document.createElement("span");
 
-        const heartY =
-            13 * Math.cos(angle) -
-            5 * Math.cos(2 * angle) -
-            2 * Math.cos(3 * angle) -
-            Math.cos(4 * angle);
+        const size = 2 + Math.random() * 5;
+        const startX = Math.random() * 100;
+        const startY = 70 + Math.random() * 30;
+        const horizontalMovement =
+            (Math.random() - 0.5) * 160;
 
-        const horizontalPosition =
-            50 + heartX * 1.35;
+        light.style.position = "absolute";
+        light.style.left = `${startX}%`;
+        light.style.top = `${startY}%`;
+        light.style.width = `${size}px`;
+        light.style.height = `${size}px`;
+        light.style.borderRadius = "50%";
+        light.style.background =
+            "rgba(255, 255, 255, 0.95)";
+        light.style.boxShadow =
+            "0 0 8px white, 0 0 18px #ffd0df";
+        light.style.opacity = "0";
 
-        const verticalPosition =
-            48 - heartY * 1.35;
+        heartStars.appendChild(light);
 
-        const star = document.createElement("span");
-
-        star.className = "star";
-        star.style.setProperty(
-            "--x",
-            `${horizontalPosition}%`
+        light.animate(
+            [
+                {
+                    transform:
+                        "translate(0, 0) scale(0.5)",
+                    opacity: 0
+                },
+                {
+                    opacity: 0.95,
+                    offset: 0.18
+                },
+                {
+                    transform:
+                        `translate(${horizontalMovement}px, -75vh) scale(1.3)`,
+                    opacity: 0
+                }
+            ],
+            {
+                duration:
+                    7000 + Math.random() * 5000,
+                delay:
+                    Math.random() * 3500,
+                iterations: Infinity,
+                easing: "ease-in-out"
+            }
         );
-
-        star.style.setProperty(
-            "--y",
-            `${verticalPosition}%`
-        );
-
-        star.style.setProperty(
-            "--delay",
-            `${index * 0.018}s`
-        );
-
-        heartStars.appendChild(star);
     }
-
-    window.requestAnimationFrame(() => {
-        document.querySelectorAll(".star").forEach((star) => {
-            star.classList.add("formed");
-        });
-    });
 }
 
 /* FRASES DA SURPRESA FINAL */
