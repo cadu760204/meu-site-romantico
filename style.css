@@ -1037,3 +1037,12 @@ footer span {
 .hero .hero-phrase {
     font-size: clamp(1.1rem, 3vw, 1.6rem);
 }
+.intro-message {
+    width: min(620px, 90%);
+    margin: 24px auto 28px;
+    color: rgba(255, 255, 255, 0.88);
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(1.15rem, 2.5vw, 1.55rem);
+    font-style: italic;
+    line-height: 1.5;
+}
